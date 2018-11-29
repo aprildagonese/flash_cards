@@ -7,19 +7,13 @@ class Deck
 
   def initialize(cards)
     @cards = cards
+    @count = cards.count
   end
 
   def cards_in_category(category)
-    @cards_in_category = @cards.map do |card|
-      if card.category == category
-        card
-      end
+    @cards.select do |card|
+      card.category.to_s == category.to_s
     end
   end
 
 end
-binding.pry
-
-#pry requires not working
-#need nil in test_category_search_works?
-#
