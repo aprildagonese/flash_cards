@@ -10,7 +10,7 @@ attr_accessor :guess, :card
   end
 
   def correct?
-    @guess.downcase.capitalize == card.answer
+    @guess.downcase == card.answer.downcase
   end
 
   def feedback

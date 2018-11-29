@@ -3,11 +3,11 @@ require './lib/turn'
 require 'pry'
 
 class Deck
-  attr_accessor :cards, :cards_in_category, :count
+  attr_accessor :cards, :count
 
   def initialize(cards)
     @cards = cards
-    @count = cards.count
+    @count = cards.count #consider separating into different method
   end
 
   def cards_in_category(category)
