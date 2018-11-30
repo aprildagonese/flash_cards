@@ -4,9 +4,9 @@ class Card
   attr_accessor :question, :answer, :category
 
   def initialize(question, answer, category)
-    @question = question
-    @answer = answer
-    @category = category
+    @question = question.to_s
+    @answer = answer.to_s
+    @category = category.to_s
   end
 
 end

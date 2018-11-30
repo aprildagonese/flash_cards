@@ -4,27 +4,23 @@ require './lib/deck'
 require 'pry'
 
 class Round
-  attr_accessor :turn, :turns, :deck, :incorrect_turns, :correct_turns
-  card_index = 0
+  attr_accessor :turns, :deck
 
   def initialize(deck)
-    @card_index = 0
-    @current_card = deck.cards[@card_index]
-    @correct_turns = []
-    @incorrect_turns = []
-    @turns = (@correct_turns + @incorrect_turns)
-    @guesses = []
+    @turns = []
     @deck = deck
   end
 
-  def take_turn(guess)
-    @turn = Turn.new(guess, @current_card)
-    @card_index += 1
-    store_turn_results
+  def card_index
+    @turns.count
   end
 
-  def store_turn_results
-    @turns << @turn
+  def current_card
+    deck.cards[card_index]
+  end
+
+  def take_turn(guess)
+    @turns << Turn.new(guess, current_card)
   end
 
   def correct_turns
@@ -47,12 +43,36 @@ class Round
 
   def number_correct_by_category(category)
     correct_by_cat = correct_turns.select do |turn|
-      turn.card.category.to_s == category.to_s
+      turn.card.category == category
     end
     correct_by_cat.count
   end
 
-  def 
+  #could pull out method that takes category and array for these two
+
+  def number_in_category(category)
+    number_in_category = turns.select do |turn|
+      turn.card.category == category
+    end
+    number_in_category.count
+  end
+
+  def get_percent(numerator, denominator)
+    return 0.0 if denominator == 0
+    fraction = (numerator/denominator)*100
+    fraction.to_f
+  end
+
+  def percent_correct
+    get_percent(correct_turns.count, @turns.count)
+  end
+
+  def percent_correct_by_category(category)
+    get_percent(number_correct_by_category(category), number_in_category(category))
+  end
+
+  def start
+    puts "Welcome! You're playing with #{deck.count} cards."
 
 end
 
@@ -66,8 +86,3 @@ round1.take_turn("answer1")
 round1.number_correct_by_category("category1")
 
 binding.pry
-
-
-
-# round.percent_correct
-# round.percent_correct_by_category(:Geography)
