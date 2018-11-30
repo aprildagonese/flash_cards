@@ -16,7 +16,7 @@ class Round
   end
 
   def current_card
-    deck.cards[card_index]
+    @deck.cards[card_index]
   end
 
   def take_turn(guess)
@@ -41,20 +41,21 @@ class Round
     end
   end
 
-  def number_correct_by_category(category)
-    correct_by_cat = correct_turns.select do |turn|
+  def number_by_category_query(category, turns_array)
+    group = turns_array.select do |turn|
       turn.card.category == category
     end
-    correct_by_cat.count
+    group.count
+  end
+
+  def number_correct_by_category(category)
+    number_by_category_query(category, correct_turns)
   end
 
   #could pull out method that takes category and array for these two
 
   def number_in_category(category)
-    number_in_category = turns.select do |turn|
-      turn.card.category == category
-    end
-    number_in_category.count
+    number_by_category_query(category, turns)
   end
 
   def get_percent(numerator, denominator)
@@ -72,17 +73,18 @@ class Round
   end
 
   def start
-    puts "Welcome! You're playing with #{deck.count} cards."
+    puts "Welcome! You're playing with #{@deck.count} cards."
+  end
 
 end
 
-card1 = Card.new("question1", "answer1", "category1")
-card2 = Card.new("question2", "answer2", "category2")
-card3 = Card.new("question3", "answer3", "category1")
-deck1 = Deck.new([card1, card2, card3])
-round1 = Round.new(deck1)
-round1.deck
-round1.take_turn("answer1")
-round1.number_correct_by_category("category1")
+# card1 = Card.new("question1", "answer1", "category1")
+# card2 = Card.new("question2", "answer2", "category2")
+# card3 = Card.new("question3", "answer3", "category1")
+# deck1 = Deck.new([card1, card2, card3])
+# round1 = Round.new(deck1)
+# round1.deck
+# round1.take_turn("answer1")
+# round1.number_correct_by_category("category1")
 
-binding.pry
+# binding.pry

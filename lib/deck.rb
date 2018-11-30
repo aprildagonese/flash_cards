@@ -7,7 +7,10 @@ class Deck
 
   def initialize(cards)
     @cards = cards
-    @count = cards.count #consider separating into different method
+  end
+
+  def count
+    cards.count
   end
 
   def cards_in_category(category)
