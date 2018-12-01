@@ -41,13 +41,6 @@ class Round
     end
   end
 
-  def categories
-    categories = @deck.cards.map do |card|
-      card.category
-    end
-    categories.uniq
-  end
-
   def number_by_category_query(category, turns_array)
     group = turns_array.select do |turn|
       turn.card.category == category
@@ -102,7 +95,7 @@ You had #{correct_turns.count} correct guesses out of #{@deck.count} for a total
   end
 
   def print_category_results
-    categories.each do |category|
+    @deck.categories.each do |category|
       puts "#{category} - #{percent_correct_by_category(category)}%"
     end
   end

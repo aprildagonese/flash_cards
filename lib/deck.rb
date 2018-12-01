@@ -9,6 +9,13 @@ class Deck
     @cards = cards
   end
 
+  def categories
+    categories = cards.map do |card|
+      card.category
+    end
+    categories.uniq
+  end
+
   def count
     cards.count
   end
