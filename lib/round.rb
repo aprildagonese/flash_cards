@@ -4,7 +4,7 @@ require './lib/deck'
 require 'pry'
 
 class Round
-  attr_accessor :turns, :deck
+  attr_reader :turns, :deck
 
   def initialize(deck)
     @turns = []
@@ -32,12 +32,6 @@ class Round
   def incorrect_turns
     @turns.select do |turn|
       !turn.correct?
-    end
-  end
-
-  def guesses
-    @guesses = @turns.map do |turn|
-      turn.guess
     end
   end
 
@@ -89,8 +83,8 @@ class Round
   end
 
   def end_game
-    puts "****** Game over! ******
-You had #{correct_turns.count} correct guesses out of #{@deck.count} for a total score of #{percent_correct}%."
+    puts "****** Game over! ******"
+    puts "You had #{correct_turns.count} correct guesses out of #{@deck.count} for a total score of #{percent_correct}%."
     print_category_results
   end
 
@@ -101,14 +95,3 @@ You had #{correct_turns.count} correct guesses out of #{@deck.count} for a total
   end
 
 end
-
-# card1 = Card.new("question1", "answer1", "category1")
-# card2 = Card.new("question2", "answer2", "category2")
-# card3 = Card.new("question3", "answer3", "category1")
-# deck1 = Deck.new([card1, card2, card3])
-# round1 = Round.new(deck1)
-# round1.take_turn("answer1")
-# round1.take_turn("answer1")
-# round1.take_turn("answer1")
-#
-# binding.pry
