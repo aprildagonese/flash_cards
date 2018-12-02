@@ -8,17 +8,19 @@ class CardGenerator
     turn_into_cards
   end
 
+  private
+
   def turn_into_cards
-    turn_to_array
-    turn_to_subarrays
+    read_file
+    normalize_data
     generate_card_objects
   end
 
-  def turn_to_array
+  def read_file
     @card_data_array = File.readlines(@filename)
   end
 
-  def turn_to_subarrays
+  def normalize_data
     @future_cards = @card_data_array.map do |card_data|
       card_data.chomp.split(",")
     end

@@ -3,7 +3,7 @@ require './lib/turn'
 require 'pry'
 
 class Deck
-  attr_accessor :cards, :count
+  attr_reader :cards, :count
 
   def initialize(cards)
     @cards = cards
