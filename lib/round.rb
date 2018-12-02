@@ -1,8 +1,3 @@
-require './lib/card'
-require './lib/turn'
-require './lib/deck'
-require 'pry'
-
 class Round
   attr_reader :turns, :deck
 

@@ -1,5 +1,3 @@
-require './lib/card'
-
 class CardGenerator
   attr_reader :card_data_array, :future_cards, :cards
 

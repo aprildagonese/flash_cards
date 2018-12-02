@@ -1,7 +1,3 @@
-require './lib/card'
-require './lib/turn'
-require 'pry'
-
 class Deck
   attr_reader :cards, :count
 
