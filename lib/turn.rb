@@ -1,8 +1,5 @@
-require './lib/card'
-require 'pry'
-
 class Turn
-attr_accessor :guess, :card
+  attr_reader :guess, :card
 
   def initialize(guess, card)
     @guess = guess
