@@ -33,4 +33,11 @@ class TurnTest < Minitest::Test
     assert_equal "Incorrect.", turn.feedback
   end
 
+  def test_white_space_wrong_case_correct_responses
+    card = Card.new("What is the capital of Alaska?", "Juneau", :Geography)
+    turn = Turn.new("  Juneau ", card)
+
+    assert_equal true, turn.correct?
+  end
+
 end
