@@ -1,27 +1,33 @@
-class CardGenerator
-  attr_reader :card_data_array
+require './lib/card'
 
-  def initialize
+class CardGenerator
+  attr_reader :card_data_array, :future_cards, :cards
+
+  def initialize(filename)
+    @filename = filename
     turn_into_cards
   end
 
   def turn_into_cards
     turn_to_array
     turn_to_subarrays
+    generate_card_objects
   end
 
   def turn_to_array
-    @card_data_array = File.readlines('./lib/cards.txt')
+    @card_data_array = File.readlines(@filename)
   end
 
   def turn_to_subarrays
-    individual_cards = []
-    @card_data_array.each do |string|
-      individual_cards << string.chomp.split(",")
+    @future_cards = @card_data_array.map do |card_data|
+      card_data.chomp.split(",")
     end
-    p individual_cards
+  end
+
+  def generate_card_objects
+    @cards = @future_cards.map do |card_args|
+      Card.new(*card_args)
+    end
   end
 
 end
-
-CardGenerator.new

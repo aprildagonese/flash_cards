@@ -1,0 +1,5 @@
+require './test/card_generator_test'
+require './test/round_test'
+require './test/turn_test'
+require './test/deck_test'
+require './test/card_test'

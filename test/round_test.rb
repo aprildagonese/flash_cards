@@ -55,7 +55,7 @@ class RoundTest < Minitest::Test
     @round1.take_turn("answer1")
     @round1.take_turn("answer1")
     @round1.take_turn("answer1")
-    assert_equal ((1.0/3.0)*100).to_f, @round1.percent_correct
+    assert_equal ((1.0/3.0)*100).to_f.round(2), @round1.percent_correct
   end
 
   def test_percent_correct_by_category
