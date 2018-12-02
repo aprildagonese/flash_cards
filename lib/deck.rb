@@ -3,16 +3,26 @@ require './lib/turn'
 require 'pry'
 
 class Deck
-  attr_accessor :cards, :cards_in_category, :count
+  attr_accessor :cards, :count
 
   def initialize(cards)
     @cards = cards
-    @count = cards.count
+  end
+
+  def categories
+    categories = cards.map do |card|
+      card.category
+    end
+    categories.uniq
+  end
+
+  def count
+    cards.count
   end
 
   def cards_in_category(category)
     @cards.select do |card|
-      card.category.to_s == category.to_s
+      card.category == category
     end
   end
 
